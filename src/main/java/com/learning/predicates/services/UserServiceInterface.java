@@ -4,5 +4,5 @@ import com.learning.predicates.dto.UserRequest;
 import com.learning.predicates.dto.UserResponseList;
 
 public interface UserServiceInterface {
-  UserResponseList getUserList(UserRequest userRequest);
+  UserResponseList getUserList(String name, String gender, String email,Integer pageNo, Integer pageSize);
 }

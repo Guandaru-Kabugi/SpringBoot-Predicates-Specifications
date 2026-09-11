@@ -13,20 +13,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserSpecification {
 
-  public Specification<User> getUsers(UserRequest request) {
+  public Specification<User> getUsers(String name, String gender, String email) {
     return (root, query, criteriaBuilder) -> {
 
       List<Predicate> predicates = new ArrayList<>();
 
-      if (request.getEmail() != null && !request.getEmail().isEmpty()) {
-        predicates.add(criteriaBuilder.equal(root.get("email"), request.getEmail()));
+      if (email != null && email.isEmpty()) {
+        predicates.add(criteriaBuilder.equal(root.get("email"), email));
       }
-      if (request.getName() != null && !request.getName().isEmpty()) {
+      if (name != null && name.isEmpty()) {
         predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("fullName")),
-            "%" + request.getName().toLowerCase() + "%"));
+            "%" + name.toLowerCase() + "%"));
       }
-      if (request.getGender() != null && !request.getGender().isEmpty()) {
-        predicates.add(criteriaBuilder.equal(root.get("gender"), request.getGender()));
+      if (gender != null && gender.isEmpty()) {
+        predicates.add(criteriaBuilder.equal(root.get("gender"), gender));
       }
 
       query.orderBy(criteriaBuilder.desc(root.get("experience")));

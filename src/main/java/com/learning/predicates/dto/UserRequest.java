@@ -7,6 +7,6 @@ public class UserRequest {
   private String gender;
   private String email;
   private String name;
-  private int pageNumber;
-  private int pageSize;
+  private Integer pageNumber;
+  private Integer pageSize;
 }

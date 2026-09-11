@@ -26,11 +26,13 @@ public class UserServiceImpl implements UserServiceInterface {
   @Override
   public UserResponseList getUserList(String name, String gender, String email,Integer pageNo, Integer pageSize) {
     Page<User> pages;
-    if (pageNo == null) {
+    if (pageNo == null && pageSize == null) {
       pages = new PageImpl<>(userRepository.findAll(userSpecification.getUsers(name,gender,email)));
     } else {
-      int enteredPageSize = pageSize == null ? 10 : pageSize;
-      Pageable pageable = PageRequest.of(pageNo - 1,
+      int enteredPageSize = resolvePageSize(pageSize);
+
+      int enteredPageNo = resolvePageNo(pageNo);
+      Pageable pageable = PageRequest.of(enteredPageNo - 1,
           enteredPageSize);
       pages = userRepository.findAll(userSpecification.getUsers(name,gender,email), pageable);
     }
@@ -41,5 +43,18 @@ public class UserServiceImpl implements UserServiceInterface {
     userResponseList.setContent(pages.getContent().stream().map(UserMapper::toUserResponseList).collect(
         Collectors.toList()));
     return userResponseList;
+  }
+  private int resolvePageNo(Integer pageNo) {
+    if (pageNo != null && pageNo < 1) {
+      throw new IllegalArgumentException("pageNo must be 1 or greater");
+    }
+    return pageNo == null ? 1 : pageNo;
+  }
+
+  private int resolvePageSize(Integer pageSize) {
+    if (pageSize != null && pageSize < 1) {
+      throw new IllegalArgumentException("pageSize must be 1 or greater");
+    }
+    return pageSize == null ? 10 : pageSize;
   }
 }

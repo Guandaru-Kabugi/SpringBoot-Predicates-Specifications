@@ -18,14 +18,14 @@ public class UserSpecification {
 
       List<Predicate> predicates = new ArrayList<>();
 
-      if (email != null && email.isEmpty()) {
-        predicates.add(criteriaBuilder.equal(root.get("email"), email));
+      if (email != null && !email.isBlank()) {
+        predicates.add(criteriaBuilder.like(root.get("email"), "%" + email.toLowerCase() + "%"));
       }
-      if (name != null && name.isEmpty()) {
+      if (name != null && !name.isBlank()) {
         predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("fullName")),
             "%" + name.toLowerCase() + "%"));
       }
-      if (gender != null && gender.isEmpty()) {
+      if (gender != null && !gender.isBlank()) {
         predicates.add(criteriaBuilder.equal(root.get("gender"), gender));
       }
 

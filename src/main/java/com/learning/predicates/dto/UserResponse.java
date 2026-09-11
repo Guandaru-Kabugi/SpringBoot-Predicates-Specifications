@@ -1,5 +1,6 @@
 package com.learning.predicates.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,7 +20,7 @@ public class UserResponse {
   private String lastName;
   private String fullName;
   private String gender;
-  private Date birthDate;
+  private LocalDate birthDate;
   private String phNumber;
   private String summary;
   private Integer experience;

@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import java.time.LocalDate;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -46,7 +47,7 @@ public class User {
   @Column(name = "gender")
   private String gender;
   @Column(name = "birth_date")
-  private Date birthDate;
+  private LocalDate birthDate;
   @Column(name = "phone_number")
   private String phNumber;
   @Column(name = "summary")

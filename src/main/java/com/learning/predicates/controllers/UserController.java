@@ -23,6 +23,6 @@ public class UserController {
       @RequestParam(value = "pageNo", required = false) Integer pageNo,
       @RequestParam(value = "pageSize", required = false) Integer pageSize
   ){
-    return ResponseEntity.ok(userService.getUserList(gender, email, name, pageNo, pageSize));
+    return ResponseEntity.ok(userService.getUserList(name, gender, email, pageNo, pageSize));
   }
 }
